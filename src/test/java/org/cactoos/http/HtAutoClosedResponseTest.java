@@ -26,6 +26,8 @@ package org.cactoos.http;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
+import java.net.SocketException;
+
 import org.cactoos.http.io.ReadBytes;
 import org.cactoos.text.TextOf;
 import org.junit.Test;
@@ -73,7 +75,7 @@ public final class HtAutoClosedResponseTest {
                     new Assertion<>(
                         "must behave as closed",
                         ins::available,
-                        new Throws<>("Stream closed.", IOException.class)
+                        new Throws<>("Socket closed", SocketException.class)
                     ).affirm();
                     // @checkstyle IllegalCatchCheck (1 line)
                 } catch (final Exception ex) {
